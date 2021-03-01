@@ -5,7 +5,7 @@ pipeline {
      }
     tools{
         maven 'maven'
-        jdk 'Jdk'
+        jdk 'jdk'
     }
     stages{
           stage('Fetch') {
@@ -13,13 +13,13 @@ pipeline {
                sh 'echo $JOB_NAME'
                 sh 'echo $BUILD_NUMBER'
                 sh 'echo Fetch'
-               git branch: 'master', url: 'https://github.com/roshenreji/SpringChallenge.git'
+               git branch: 'master', url: 'https://github.com/keerthi-battula/SpringChallenge.git'
             }
         }
         
         stage('Clean'){
             steps{
-                dir("C:/Users/roshe/.jenkins/workspace/AwsChallenge/CodingChallenge-2"){
+                dir("C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace/AwsChallenge/CodingChallenge-2"){
                     sh 'echo Clean'
                     sh 'mvn  clean'
                 }
@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Validate'){
                 steps{
-                     dir("C:/Users/roshe/.jenkins/workspace/AwsChallenge/CodingChallenge-2"){
+                     dir("C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace/AwsChallenge/CodingChallenge-2"){
                 
                         sh 'mvn  validate'
                      }
@@ -36,7 +36,7 @@ pipeline {
          }
         stage('Compile'){
                 steps{
-                     dir("C:/Users/roshe/.jenkins/workspace/AwsChallenge/CodingChallenge-2"){
+                     dir("C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace/AwsChallenge/CodingChallenge-2"){
                  
                         sh 'echo Compile'
                          sh 'mvn  compile'
@@ -48,7 +48,7 @@ pipeline {
         
              stage('Test'){
                  steps {
-                      dir("C:/Users/roshe/.jenkins/workspace/AwsChallenge/CodingChallenge-2"){
+                      dir("C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace/AwsChallenge/CodingChallenge-2"){
                          sh 'echo Test'
                          sh 'mvn test'
                       }
@@ -62,8 +62,8 @@ pipeline {
 
             stage('Sonar Analysis'){
             steps{
-                 dir("C:/Users/roshe/.jenkins/workspace/AwsChallenge/CodingChallenge-2"){
-                    withSonarQubeEnv('Sonar'){
+                 dir("C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace/AwsChallenge/CodingChallenge-2"){
+                    withSonarQubeEnv('sonar'){
                         withMaven(maven:'maven'){
                             sh 'mvn sonar:sonar'
                         }
@@ -89,7 +89,7 @@ pipeline {
         }
             stage('Build'){
             steps {
-                 dir("C:/Users/roshe/.jenkins/workspace/AwsChallenge/CodingChallenge-2"){
+                 dir("C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace/AwsChallenge/CodingChallenge-2"){
                 
                         sh 'echo Build'
                         sh 'mvn  package -Dbuild.number=-${BUILD_NUMBER}'
